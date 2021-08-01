@@ -59,11 +59,11 @@ export const ImportForm = ({ dispatch, hide }: ImportFormProps) => {
             }}
             type="button"
           >
-            <CheckIcon />
+            <CheckIcon fill="#669f18" />
           </button>
 
           <button onClick={hide} type="button">
-            <CloseIcon />
+            <CloseIcon fill="#669f18" />
           </button>
         </div>
       </form>

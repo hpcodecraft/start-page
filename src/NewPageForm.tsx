@@ -22,11 +22,11 @@ export const NewPageForm = ({ dispatch }: NewPageFormProps) => {
       <div className="new-page-button">
         <div className="tooltip">
           <button
-            // className="new-page-button"
             onClick={() => setVisible(true)}
             type="button"
+            className={visible ? "selected" : ""}
           >
-            <AddIcon />
+            <AddIcon fill="#669f18" />
           </button>
           <label>Add link</label>
         </div>
@@ -75,11 +75,11 @@ export const NewPageForm = ({ dispatch }: NewPageFormProps) => {
                 }}
                 type="button"
               >
-                <CheckIcon />
+                <CheckIcon fill="#669f18" />
               </button>
 
               <button onClick={() => setVisible(false)} type="button">
-                <CloseIcon />
+                <CloseIcon fill="#669f18" />
               </button>
             </div>
           </form>

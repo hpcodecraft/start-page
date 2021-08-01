@@ -1,12 +1,23 @@
 # start-page
 
-[https://hpcodecraft.github.io/start-page](https://hpcodecraft.github.io/start-page)
-
 A website that lists a collection of links.
 
 You can add & delete links and sort them into groups.
 
 The collection is saved in the browser and can be exported & imported.
+
+The project also contains a small node backend which, when run alongside the react app, allows the app to monitor the online status of your collected links. When the backend is detected, a new "Heartbeat" setting will appear which allows you to set the scanning frequency.
+
+Note:
+
+Editing entries is not supported - if you made a typo, delete the link and add it again. If you want to change the order of items, export your colletion, edit the json file to your likings and re-import it again.
+
+## Installation
+
+Clone or download the project and serve the `docs` folder from a webserver.
+To run the backend, use `yarn server`.
+
+Alternatively, you can spin both up with docker using the included docker-compose file.
 
 ## Development
 
@@ -14,33 +25,20 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
+Runs both, app & backend in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `yarn client`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run react app
+
+### `yarn server`
+
+Run node backend
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Builds the app for production to the `docs` folder.

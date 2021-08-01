@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 
 import { NewPageForm } from "./NewPageForm";
 import { PageItem } from "./PageItem";
@@ -10,6 +10,22 @@ import type { Action, State } from "./types";
 import { ActionType } from "./types";
 
 const STORAGE_KEY = "start-page";
+
+async function checkHeartbeatEnabled() {
+  let enabled;
+
+  try {
+    await fetch("http://localhost:5000/heartbeat-enabled")
+      .then(response => response.json())
+      .then(json => {
+        enabled = json.enabled;
+      });
+  } catch (error) {
+    enabled = false;
+  }
+
+  return enabled;
+}
 
 function saveState(state: State) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -46,6 +62,8 @@ const NO_GROUP = "<<no-group>>";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [heartbeatEnabled, setHeartbeatEnabled] = useState(false);
+  const [pulseEvery, setPulseEvery] = useState(0);
 
   let stateGrouped: { [index: string]: State } = {};
 
@@ -63,21 +81,39 @@ function App() {
     }
   });
 
-  // console.log({ state, stateGrouped });
+  useEffect(() => {
+    checkHeartbeatEnabled().then(enabled => {
+      setHeartbeatEnabled(enabled as boolean);
+    });
+  });
 
   return (
     <div className="App">
-      <Settings dispatch={dispatch} state={state} />
+      <Settings
+        dispatch={dispatch}
+        state={state}
+        heartbeatEnabled={heartbeatEnabled}
+        pulseEvery={pulseEvery}
+        setPulseEvery={setPulseEvery}
+      />
       <NewPageForm dispatch={dispatch} />
       <ul className="all-pages">
         {Object.keys(stateGrouped).map(group => {
           return (
             <React.Fragment key={group}>
               <li className="group">
-                <h5>{group}</h5>
+                {group !== NO_GROUP && <h5>{group}</h5>}
                 <ul className="group-list">
                   {stateGrouped[group].map(page => {
-                    return <PageItem page={page} dispatch={dispatch} />;
+                    return (
+                      <PageItem
+                        key={page.url}
+                        page={page}
+                        dispatch={dispatch}
+                        heartbeatEnabled={heartbeatEnabled}
+                        pulseEvery={pulseEvery}
+                      />
+                    );
                   })}
                 </ul>
               </li>
