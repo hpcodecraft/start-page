@@ -1,10 +1,17 @@
 const axios = require("axios");
 const cors = require("cors");
 const express = require("express");
+const path = require("path");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 80;
 
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, "docs")));
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "docs", "index.html"));
+});
 
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`));
