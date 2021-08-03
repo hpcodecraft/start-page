@@ -21,11 +21,10 @@
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
-    "nodemon": "^2.0.12"
   },
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "server": "nodemon server.js",
+    "server": "node server.js",
     "client": "react-scripts start",
     "build": "react-scripts build && rm -rf docs/* && mv build/* docs",
     "test": "react-scripts test",
