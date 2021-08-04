@@ -31,7 +31,7 @@ export const PageItem = ({
         setLoading(true);
         setStatusText("Loading…");
         try {
-          fetch("http://localhost/heartbeat?page=" + page.url)
+          fetch("/heartbeat?page=" + page.url)
             .then(response => response.json())
             .then(json => {
               setStatus(json.status);

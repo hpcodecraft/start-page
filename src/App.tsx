@@ -15,7 +15,7 @@ async function checkHeartbeatEnabled() {
   let enabled;
 
   try {
-    await fetch("http://localhost/heartbeat-enabled")
+    await fetch("/heartbeat-enabled")
       .then(response => response.json())
       .then(json => {
         enabled = json.enabled;
