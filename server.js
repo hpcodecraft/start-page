@@ -20,28 +20,32 @@ app.get("/heartbeat-enabled", function (req, res) {
   return res.send({ enabled: true });
 });
 
-app.get("/heartbeat", async (req, res) => {
+app.get("/heartbeat", (req, res) => {
   // await new Promise(resolve => setTimeout(resolve, 2000));
 
-  axios
-    .get(req.query.page)
-    .then(response => {
+  const handleResponse = response => {
+    console.log(
+      "heartbeat",
+      req.query.page,
+      response?.status,
+      response?.statusText
+    );
+
+    if (!response) {
+      res.send({
+        status: null,
+        text: null,
+      });
+    } else {
       res.send({
         status: response.status,
         text: response.statusText,
       });
-    })
-    .catch(({ response }) => {
-      if (!response) {
-        res.send({
-          status: null,
-          text: null,
-        });
-      } else {
-        res.send({
-          status: response.status,
-          text: response.statusText,
-        });
-      }
-    });
+    }
+  };
+
+  axios
+    .get(req.query.page)
+    .then(handleResponse)
+    .catch(({ response }) => handleResponse(response));
 });
