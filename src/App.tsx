@@ -84,6 +84,7 @@ function App() {
   useEffect(() => {
     checkHeartbeatEnabled().then(enabled => {
       setHeartbeatEnabled(enabled as boolean);
+      setPulseEvery(enabled ? 30 : 0);
     });
   });
 
