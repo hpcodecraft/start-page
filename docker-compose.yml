@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "node"
+    user: "root"
     working_dir: /usr/src/app
     ports:
       - 80:80
