@@ -28,7 +28,6 @@ export const PageItem = ({
     if (heartbeatEnabled && pulseEvery > 0) {
       const heartBeat = () => {
         setLoading(true);
-        setStatusText("Loading…");
         try {
           fetch("/heartbeat?page=" + page.url)
             .then(response => response.json())
