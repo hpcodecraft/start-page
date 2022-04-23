@@ -37,13 +37,21 @@ export const PageStatus = ({ code, loading, text }: PageStatusProps) => {
     setLastCode(code);
   }, [code]);
 
+  let displayText = "";
+  if (text) {
+    displayText = ` ${text}`;
+  }
+  if (loading) {
+    displayText += " (check in progress)";
+  }
+
   return (
     <span className="page-status">
       <div className="tooltip">
         {icon}
-        <label className="right">{`${code !== null ? `${code} ` : ""} ${text}${
-          loading ? "check in progress" : ""
-        }`}</label>
+        <label className="right">{`${
+          code !== null ? `${code} ` : ""
+        }${displayText}`}</label>
       </div>
     </span>
   );
