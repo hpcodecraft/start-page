@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { ReactComponent as OnlineIcon } from "./assets/access-point.svg";
 import { ReactComponent as OnlineWithProblemsIcon } from "./assets/access-point-remove.svg";
@@ -13,11 +13,12 @@ type PageStatusProps = {
 
 export const PageStatus = ({ code, loading, text }: PageStatusProps) => {
   const iconWidth = 18;
+  const [lastCode, setLastCode] = useState<number | null>(null);
   let icon;
-  if (loading) {
+  if (loading && !lastCode) {
     icon = <LoadingIcon width={iconWidth} fill="#c8f550" />;
   } else {
-    switch (code) {
+    switch (lastCode) {
       case 200:
       case 302:
         icon = <OnlineIcon width={iconWidth} fill="#c8f550" />;
@@ -35,6 +36,10 @@ export const PageStatus = ({ code, loading, text }: PageStatusProps) => {
         break;
     }
   }
+
+  useEffect(() => {
+    setLastCode(code);
+  }, [code]);
 
   return (
     <span className="page-status">

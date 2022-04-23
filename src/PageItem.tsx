@@ -27,7 +27,6 @@ export const PageItem = ({
   useEffect(() => {
     if (heartbeatEnabled && pulseEvery > 0) {
       const heartBeat = () => {
-        // console.log("heartbeat", page.url);
         setLoading(true);
         setStatusText("Loading…");
         try {
