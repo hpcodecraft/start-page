@@ -42,7 +42,11 @@ export const PageStatus = ({ code, loading, text }: PageStatusProps) => {
     displayText = ` ${text}`;
   }
   if (loading) {
-    displayText += " (check in progress)";
+    if (displayText.length > 0) {
+      displayText += " (check in progress)";
+    } else {
+      displayText = "check in progress";
+    }
   }
 
   return (
