@@ -42,7 +42,7 @@ export const PageStatus = ({ code, loading, text }: PageStatusProps) => {
       <div className="tooltip">
         {icon}
         <label className="right">{`${code !== null ? `${code} ` : ""} ${text}${
-          loading && " - check in progress"
+          loading ? "check in progress" : ""
         }`}</label>
       </div>
     </span>
